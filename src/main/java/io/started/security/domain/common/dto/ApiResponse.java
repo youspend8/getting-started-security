@@ -15,7 +15,7 @@ public class ApiResponse<T> {
     private T data;
 
     public static ApiResponse<Void> success() {
-        return of(HttpStatus.OK);
+        return emptyOf(HttpStatus.OK);
     }
 
     public static <T> ApiResponse<T> valueOf(T data) {
@@ -23,10 +23,10 @@ public class ApiResponse<T> {
     }
 
     public static ApiResponse<Void> error(HttpStatus httpStatus) {
-        return of(httpStatus);
+        return emptyOf(httpStatus);
     }
 
-    private static ApiResponse<Void> of(HttpStatus httpStatus) {
+    public static ApiResponse<Void> emptyOf(HttpStatus httpStatus) {
         return new ApiResponse<>(httpStatus.getReasonPhrase(), null);
     }
 
