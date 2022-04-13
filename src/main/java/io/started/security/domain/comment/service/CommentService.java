@@ -14,7 +14,7 @@ public class CommentService {
     }
 
     @Transactional
-    public void modify(long postId, long commentId) {
+    public void modify(long commentId, CommentDto commentDto) {
 
     }
 
