@@ -35,7 +35,6 @@ public class CommentControllerTests {
     void shouldDeleteNoContent(long commentId) throws Exception {
         mockMvc.perform(delete("/comment/{commentId}", commentId))
                 .andExpect(status().isNoContent())
-                .andExpect(jsonPath("$.message").value(HttpStatus.NO_CONTENT.getReasonPhrase()))
                 .andDo(print());
     }
 

@@ -56,7 +56,6 @@ public class PostControllerTests {
     void shouldDeleteNoContent(long postId) throws Exception {
         mockMvc.perform(delete("/post/{postId}", postId))
                 .andExpect(status().isNoContent())
-                .andExpect(jsonPath("$.message").value(HttpStatus.NO_CONTENT.getReasonPhrase()))
                 .andDo(print());
     }
 }
