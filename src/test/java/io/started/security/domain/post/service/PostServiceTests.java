@@ -49,7 +49,6 @@ public class PostServiceTests {
     @ParameterizedTest
     @ValueSource(ints = 1)
     void shouldRemoveSoftPost(long postId) {
-        //  TODO : fix
         PostEntity mock = Mockito.mock(PostEntity.class);
         when(postRepository.findById(anyLong())).thenReturn(Optional.of(mock));
         assertDoesNotThrow(() -> postService.removeSoft(postId));
