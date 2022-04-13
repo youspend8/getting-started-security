@@ -30,10 +30,9 @@ public class CommentController {
 
     @PutMapping("/{commentId}")
     public ResponseEntity<ApiResponse<Void>> put(
-            @RequestParam("postId") long postId,
             @PathVariable("commentId") long commentId) {
         return ResponseEntity
-                .created(URI.create(String.format("/post/%d", postId)))
+                .created(URI.create(String.format("/commentId/%d", commentId)))
                 .body(ApiResponse.emptyOf(HttpStatus.CREATED));
     }
 }

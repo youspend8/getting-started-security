@@ -2,7 +2,6 @@ package io.started.security.controller;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -41,11 +40,10 @@ public class CommentControllerTests {
     }
 
     @ParameterizedTest
-    @CsvSource({"1, 1"})
+    @ValueSource(longs = 1)
     @DisplayName("댓글 수정")
-    void shouldPutCreated(long postId, long commentId) throws Exception {
-        mockMvc.perform(put("/comment/{commentId}", commentId)
-                        .param("postId", Long.toString(postId)))
+    void shouldPutCreated(long commentId) throws Exception {
+        mockMvc.perform(put("/comment/{commentId}", commentId))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.message").value(HttpStatus.CREATED.getReasonPhrase()))
                 .andDo(print());
