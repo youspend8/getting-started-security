@@ -20,6 +20,7 @@ public class PostEntity extends BaseTimeEntity {
     @Id
     private Long postId;
     private String content;
+    private boolean remove;
 
     @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY)

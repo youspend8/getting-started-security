@@ -18,6 +18,7 @@ public class CommentEntity extends BaseTimeEntity {
     @Id
     private Long commentId;
     private String content;
+    private boolean remove;
 
     @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
