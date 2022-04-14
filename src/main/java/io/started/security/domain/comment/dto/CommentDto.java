@@ -1,5 +1,6 @@
 package io.started.security.domain.comment.dto;
 
+import io.started.security.domain.comment.jpa.entity.CommentEntity;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -15,4 +16,10 @@ public class CommentDto {
     private String content;
     private String memberName;
     private LocalDateTime createdAt;
+
+    public CommentEntity asNewEntity() {
+        return CommentEntity.builder()
+                .content(content)
+                .build();
+    }
 }
