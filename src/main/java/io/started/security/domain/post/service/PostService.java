@@ -20,10 +20,10 @@ public class PostService {
     }
 
     @Transactional
-    public void create(PostDto postDto) {
+    public long create(PostDto postDto) {
         //  TODO : 추후에 사용자 인증(Authentication) 정보를 활용하여 회원 엔티티 값을 설정해주도록 합니다.
         PostEntity postEntity = postDto.asNewEntity();
-        postRepository.save(postEntity);
+        return postRepository.save(postEntity).getPostId();
     }
 
     @Transactional
