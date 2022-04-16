@@ -1,5 +1,6 @@
 package io.started.security.domain.post.service;
 
+import io.started.security.domain.comment.dto.Paging;
 import io.started.security.domain.post.dto.PostDto;
 import io.started.security.domain.post.jpa.entity.PostEntity;
 import io.started.security.domain.post.jpa.repository.PostRepository;
@@ -10,7 +11,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
 import java.util.ArrayList;
@@ -35,7 +35,7 @@ public class PostListServiceTests {
     void shouldFetchPosts() {
         Page<PostEntity> mockList = getPostPageSample();
         when(postRepository.findAll(any(Pageable.class))).thenReturn(mockList);
-        Page<PostDto> posts = postListService.fetch(PageRequest.of(0, 5));
+        Page<PostDto> posts = postListService.fetch(Paging.of(0, 5));
         assertEquals(mockList.getSize(), posts.getSize());
     }
 

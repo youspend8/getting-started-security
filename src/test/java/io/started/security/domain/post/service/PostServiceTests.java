@@ -3,7 +3,6 @@ package io.started.security.domain.post.service;
 import io.started.security.domain.post.dto.PostDto;
 import io.started.security.domain.post.jpa.entity.PostEntity;
 import io.started.security.domain.post.jpa.repository.PostRepository;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -43,10 +42,12 @@ public class PostServiceTests {
     @DisplayName("게시글 생성")
     @Test
     void shouldCreatePost() {
-        PostEntity mock = Mockito.mock(PostEntity.class);
-        when(postRepository.save(any()))
-                .thenReturn(mock);
-        assertDoesNotThrow(() -> postService.create(Mockito.mock(PostDto.class)));
+        final long createdPostId = 1L;
+        PostDto postSample = getPostSample();
+        PostEntity postEntitySample = postSample.asNewEntity();
+        postEntitySample.setPostId(createdPostId);
+        when(postRepository.save(any())).thenReturn(postEntitySample);
+        assertDoesNotThrow(() -> postService.create(postSample));
     }
 
     @DisplayName("게시글 삭제")
@@ -56,5 +57,12 @@ public class PostServiceTests {
         PostEntity mock = Mockito.mock(PostEntity.class);
         when(postRepository.findById(anyLong())).thenReturn(Optional.of(mock));
         assertDoesNotThrow(() -> postService.removeSoft(postId));
+    }
+
+    private PostDto getPostSample() {
+        return PostDto.builder()
+                .content("게시긇 내용")
+                .memberName("게시글 작성자 이름")
+                .build();
     }
 }
