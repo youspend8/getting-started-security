@@ -3,6 +3,7 @@ package io.started.security.domain.post.service;
 import io.started.security.domain.post.dto.PostDto;
 import io.started.security.domain.post.jpa.entity.PostEntity;
 import io.started.security.domain.post.jpa.repository.PostRepository;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -29,6 +30,7 @@ public class PostServiceTests {
     @MockBean
     private PostRepository postRepository;
 
+    @DisplayName("게시글 상세 조회")
     @ParameterizedTest
     @ValueSource(ints = 1)
     void shouldFetchPost(long postId) {
@@ -38,6 +40,7 @@ public class PostServiceTests {
         assertEquals(PostDto.valueOf(mock).toString(), post.toString());
     }
 
+    @DisplayName("게시글 생성")
     @Test
     void shouldCreatePost() {
         PostEntity mock = Mockito.mock(PostEntity.class);
@@ -46,6 +49,7 @@ public class PostServiceTests {
         assertDoesNotThrow(() -> postService.create(Mockito.mock(PostDto.class)));
     }
 
+    @DisplayName("게시글 삭제")
     @ParameterizedTest
     @ValueSource(ints = 1)
     void shouldRemoveSoftPost(long postId) {

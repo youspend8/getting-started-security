@@ -3,6 +3,7 @@ package io.started.security.domain.comment.service;
 import io.started.security.domain.comment.dto.CommentDto;
 import io.started.security.domain.comment.jpa.entity.CommentEntity;
 import io.started.security.domain.comment.jpa.repository.CommentRepository;
+import io.started.security.domain.post.jpa.entity.PostEntity;
 import io.started.security.domain.post.jpa.repository.PostRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -14,7 +15,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -35,8 +35,8 @@ public class CommentServiceTests {
     @ParameterizedTest
     @ValueSource(ints = 1)
     void shouldCreateComment(long postId) {
-        CommentEntity mock = mock(CommentEntity.class);
-        when(postRepository.save(any())).thenReturn(mock);
+        PostEntity mockPost = mock(PostEntity.class);
+        when(postRepository.findById(anyLong())).thenReturn(Optional.of(mockPost));
         assertDoesNotThrow(() ->
                 commentService.create(postId, mock(CommentDto.class)));
     }
